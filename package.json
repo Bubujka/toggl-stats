@@ -1,13 +1,17 @@
 {
   "name": "toggl-stats",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Fetch today stats from toggl",
   "main": "index.js",
   "bin": {
     "toggl-stats": "./example.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Bubujka/toggl-stats.git"
   },
   "author": "Aleksej Kamynin <zendzirou@gmail.com> (http://bubujka.org/)",
   "license": "MIT",

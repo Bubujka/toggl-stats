@@ -8,7 +8,8 @@ ts(function(err,data){
   }
 
   data.forEach(function(itm){
-    console.log("%s %s %s", (itm.active ? '*' :'-'),
+    console.log("%s %s %s", 
+                (itm.active ? '*' :'-'),
                 itm.human,
                 itm.description);
   });
