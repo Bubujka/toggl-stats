@@ -1,0 +1,20 @@
+{
+  "name": "toggl-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "toggl-stats": "./example.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aleksej Kamynin <zendzirou@gmail.com> (http://bubujka.org/)",
+  "license": "MIT",
+  "dependencies": {
+    "envbang-node": "0.0.1",
+    "moment": "^2.10.6",
+    "request": "^2.61.0",
+    "underscore": "^1.8.3"
+  }
+}
