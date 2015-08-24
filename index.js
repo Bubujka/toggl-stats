@@ -34,10 +34,9 @@ module.exports = function(cb) {
     }
 
     var current = false;
-
     cb(null, _.chain(data)
       .map(function(itm){
-        if(!itm.stop){
+        if(itm.duration < 0){
           var t = Math.floor((new Date() / 1000) + itm.duration);
           itm.stop = moment().format();
           itm.duration = t;
