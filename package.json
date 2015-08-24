@@ -1,6 +1,6 @@
 {
   "name": "toggl-stats",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Fetch today stats from toggl",
   "main": "index.js",
   "bin": {

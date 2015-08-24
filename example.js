@@ -6,11 +6,13 @@ ts(function(err,data){
   if(err){
     return console.log(err);
   }
-
-  data.forEach(function(itm){
-    console.log("%s %s %s", 
-                (itm.active ? '*' :'-'),
-                itm.human,
-                itm.description);
-  });
+  for (var i in data) {
+    console.log('Workspace: ' +i);
+    data[i].forEach(function(itm){
+      console.log("%s %s %s", 
+                  (itm.active ? '*' :'-'),
+                  itm.human,
+                  itm.description);
+    });
+  }
 });

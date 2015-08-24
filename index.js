@@ -35,35 +35,41 @@ module.exports = function(cb) {
 
     var current = false;
     cb(null, _.chain(data)
-      .map(function(itm){
-        if(itm.duration < 0){
-          var t = Math.floor((new Date() / 1000) + itm.duration);
-          itm.stop = moment().format();
-          itm.duration = t;
-          current = itm;
-        }
-        return itm;
+      .groupBy('wid')
+      .mapObject(function(tasks){
+        return _.chain(tasks)
+          .map(function(itm){
+            if(itm.duration < 0){
+              var t = Math.floor((new Date() / 1000) + itm.duration);
+              itm.stop = moment().format();
+              itm.duration = t;
+              current = itm;
+            }
+            return itm;
+          })
+          .map(function(itm) {
+            return _.pick(itm, 'duration', 'description');
+          })
+          .groupBy('description')
+          .mapObject(function(gr) {
+            return _.reduce(gr, function(acc, itm){
+              return acc + itm.duration;
+            }, 0);
+          })
+          .map(function(dur, key) {
+            var h = Math.floor(dur / 3600);
+            var m = Math.floor((dur - h*3600) / 60);
+            var human = h+':'+(m<10 ? '0'+m : m);
+            return {
+              active: current && current.description === key,
+              duration: dur,
+              human: human, 
+              description: key
+            };
+          })
+          .value();
       })
-      .map(function(itm) {
-        return _.pick(itm, 'duration', 'description');
-      })
-      .groupBy('description')
-      .mapObject(function(gr) {
-        return _.reduce(gr, function(acc, itm){
-          return acc + itm.duration;
-        }, 0);
-      })
-      .map(function(dur, key) {
-        var h = Math.floor(dur / 3600);
-        var m = Math.floor((dur - h*3600) / 60);
-        var human = h+':'+(m<10 ? '0'+m : m);
-        return {
-          active: current && current.description === key,
-          duration: dur,
-          human: human, 
-          description: key
-        };
-      })
+
       .value()
     );
   });
